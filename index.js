@@ -42,24 +42,35 @@ bot.on('message', async message => {
         if (args[0]==="help"){
           message.channel.send("How I work....\nFirst, use s!create company to register a company. I will give you $5,000 to start with. You can then use s!job accept or s!job create to make a job. This can be used to gain money. You can also use s!stocks buy or s!stocks sell to buy and sell stocks for money. How buying stocks works is that you are by default given 100 shares with your company. You can sell these to people who want to buy them. You can also sell shares that you own from other companies to other people/companies.")
         }
+        
         else if(args[0]==="create"){
-          fs.writeFile('stocks/'+ args[1] + '.txt', args[1] + '\nFunds: 0 dollars', function (err) {
+          
+          fs.writeFile('stocks/companies/'+ args[1] + '.txt', args[1] + '\nFunds:  5,000 dollars', function (err) {
           if (err) throw err;
           console.log('Saved!');
-          /*let database = fs.readFile('stocks/' + args[1] + '.txt', 'utf8' , (err, data) => {
-          if (err) {
-          console.error(err)
-          return
-           }})*/
-          });
-          try {
-          const dat = fs.readFileSync('stocks/' + args[1] + '.txt', 'utf8')
+                try {
+          var dat = fs.readFileSync('stocks/companies/' + args[1] + '.txt', 'utf8')
             console.log("File read.")
           } catch (err) {
            message.channel.send(err)
           }
           message.channel.send("Company Saved as " + dat)
-        }
+        
+          });
+    }
+     else if(args[0]==="view"){
+         
+                try {
+          var dat = fs.readFileSync('stocks/companies/' + args[1] + '.txt', 'utf8')
+            console.log("File read.")
+          } catch (err) {
+           message.channel.send(err)
+          }
+          message.channel.send("Company Information:\n" + dat)
+        
+        
+    }
+   
         else
           message.reply('Hmmmmm. I cannot find what you are looking for...')
         break
