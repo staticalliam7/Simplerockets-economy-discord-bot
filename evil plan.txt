@@ -1,0 +1,5 @@
+Ok, so you will get a set amount of money on account creation, then you can gain money through stocks or completing jobs for people
+you can buy or sell these stocks, and by random the stocks will go up or down
+
+Orbltech — Today at 6:11 PM
+I believe you first need some sort of agreed upon currency. Then you start with some sort of valuation based off your assets and company goals. Then you choose a finite number of shares for your conpany(you divide the $valuation by the #shares to get share value). You then buy/sell shares based off market value

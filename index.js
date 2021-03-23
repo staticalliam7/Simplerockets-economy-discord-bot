@@ -27,13 +27,23 @@ bot.on('message', async message => {
         let msg = await message.reply('Pinging...');
         await msg.edit(`PONG! Message round-trip took ${Date.now() - msg.createdTimestamp}ms.`)
         break;
-
+      case 'invite':
+      message.channel.send("https://discord.com/api/oauth2/authorize?client_id=823021725557325834&permissions=0&scope=bot")
+      break
       case 'say':
       case 'repeat':
         if (args.length > 0)
           message.channel.send(args.join(' '));
         else
           message.reply('You did not send a message to repeat, cancelling command.')
+        break
+       case 'stocks':
+        if (args[0]==="help"){
+          message.channel.send("How I work....\nFirst, use s!create company to register a company. I will give you $5,000 to start with. You can then use s!job accept or s!job create to make a job. This can be used to gain money. You can also use s!stocks buy or s!stocks sell to buy and sell stocks for money. How buying stocks works is that you are by default given 100 shares with your company. You can sell these to people who want to buy them. You can also sell shares that you own from other companies to other people/companies.")
+        }
+         
+        else
+          message.reply('Hmmmmm. I cannot find what you are looking for...')
         break
 
       /* Unless you know what you're doing, don't change this command. */
