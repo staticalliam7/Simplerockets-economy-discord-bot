@@ -2,6 +2,8 @@ const { Client, MessageEmbed } = require('discord.js');
 const config = require('./config');
 const commands = require('./help');
 var fs = require('fs');
+const lineReader = require('line-reader');
+
 
 let bot = new Client({
   fetchAllMembers: true, // Remove this if the bot is in large guilds.
@@ -44,8 +46,8 @@ bot.on('message', async message => {
         }
         
         else if(args[0]==="create"){
-          
-          fs.writeFile('stocks/companies/'+ args[1] + '.txt', args[1] + '\nFunds:  5,000 dollars', function (err) {
+          var auth = message.author.tag
+          fs.writeFile('stocks/companies/' + args[1] + '.txt', auth + '\n'+ args[1] + '\nFunds:  5,000 dollars', function (err) {
           if (err) throw err;
           console.log('Saved!');
                 try {
@@ -54,7 +56,7 @@ bot.on('message', async message => {
           } catch (err) {
            message.channel.send(err)
           }
-          message.channel.send("Company Saved as " + dat)
+          message.channel.send("Company Saved as:\n" + dat)
         
           });
     }
@@ -69,6 +71,17 @@ bot.on('message', async message => {
           message.channel.send("Company Information:\n" + dat)
         
         
+    }
+    else if (args[0] === "owner"){
+      lineReader.eachLine('stocks/companies/' + args[1] + '.txt', function(line) {
+      console.log(line);
+      if (line.includes(message.author.tag)) {
+      message.channel.send('You own the company ' + args[0])
+}
+    else{
+      message.channel.send('You do not own that company')
+    }
+});
     }
    
         else
