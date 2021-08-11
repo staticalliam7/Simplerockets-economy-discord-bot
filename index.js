@@ -1,4 +1,4 @@
-const { Client, MessageEmbed } = require('discord.js');
+ const { Client, MessageEmbed } = require('discord.js');
 const config = require('./config');
 const commands = require('./help');
 var fs = require('fs');
@@ -20,7 +20,9 @@ bot.on('ready', () => console.log(`Logged in as ${bot.user.tag}.`));
 
 bot.on('message', async message => {
   // Check for command
+
   if (message.content.startsWith(config.prefix)) {
+  
     let args = message.content.slice(config.prefix.length).split(' ');
     let command = args.shift().toLowerCase();
 
@@ -35,8 +37,21 @@ bot.on('message', async message => {
       break
       case 'say':
       case 'repeat':
-        if (args.length > 0)
-          message.channel.send(args.join(' '));
+        if (args.length > 0){
+            if (args[0].length > 60){
+            message.reply('Haha nice try, no spamming')
+            }
+            else if(args[0]=== 's!say'){
+            message.reply('Haha nice try, no spamming')
+            }
+            else if(args[0]=== 's!ping'){
+              message.reply('Haha nice try, no spamming')
+              
+            }
+            else{
+                message.channel.send(args.join(' '));
+            }
+        }
         else
           message.reply('You did not send a message to repeat, cancelling command.')
         break
@@ -47,7 +62,7 @@ bot.on('message', async message => {
         
         else if(args[0]==="create"){
           var auth = message.author.tag
-          fs.writeFile('stocks/companies/' + args[1] + '.txt', auth + '\n'+ args[1] + '\nFunds:  5,000 dollars', function (err) {
+          fs.writeFile('stocks/companies/' + args[1] + '.txt', 'Owner:' + auth + '\n'+ args[1] + '\nFunds:  5,000 dollars', function (err) {
           if (err) throw err;
           console.log('Saved!');
                 try {
@@ -72,17 +87,18 @@ bot.on('message', async message => {
         
         
     }
-    else if (args[0] === "owner"){
-      lineReader.eachLine('stocks/companies/' + args[1] + '.txt', function(line) {
-      console.log(line);
-      if (line.includes(message.author.tag)) {
-      message.channel.send('You own the company ' + args[0])
-}
-    else{
-      message.channel.send('You do not own that company')
+    /*else if (args[0] === "owner"){
+    var auth = message.author.tag
+     lineReader.eachLine('stocks/companies/' + args[1] + '.txt', function(line) {
+  
+    if (line.includes(auth)){
+        return false // stop reading
+        message.channel.send('You own the company ' + args[1])
     }
+    message.channel.send('You do not own that company, you pleb!')
 });
-    }
+    }*/
+
    
         else
           message.reply('Hmmmmm. I cannot find what you are looking for...')
@@ -121,6 +137,7 @@ bot.on('message', async message => {
         message.channel.send(embed);
         break;
     }
+      
   }
 });
 
