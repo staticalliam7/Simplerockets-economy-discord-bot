@@ -1,1 +1,1 @@
-# Hey, welcome to my bot! As you could probably tell, this is my massive project to revolutinize the SR2 community. This is a guide to set it up on your server, and to thank some of the people who made this possible.
+I might revive this
