@@ -1,4 +1,4 @@
- const { Client, MessageEmbed } = require('discord.js');
+const { Client, MessageEmbed } = require('discord.js');
 const config = require('./config');
 const commands = require('./help');
 var fs = require('fs');
@@ -44,10 +44,10 @@ bot.on('message', async message => {
             else if(args[0]=== 's!say'){
             message.reply('Haha nice try, no spamming')
             }
-            else if(args[0]=== 's!ping'){
+            /*else if(args[0]=== 's!ping'){
               message.reply('Haha nice try, no spamming')
               
-            }
+            }*/
             else{
                 message.channel.send(args.join(' '));
             }
